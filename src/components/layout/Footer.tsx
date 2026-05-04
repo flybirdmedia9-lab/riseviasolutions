@@ -9,14 +9,10 @@ const Footer = () => {
           <div>
             <Link to="/" className="flex items-center gap-2.5 mb-4">
               <img
-                src="/risevia-favicon.svg"
+                src="/logo.png"
                 alt="Risevia Solutions LLP"
-                className="h-10 w-10"
+                className="h-28 md:h-36 w-auto"
               />
-              <div className="flex flex-col leading-none">
-                <span className="font-display text-lg font-extrabold">Risevia</span>
-                <span className="text-[10px] font-medium uppercase tracking-widest opacity-70">Solutions LLP</span>
-              </div>
             </Link>
             <p className="text-sm opacity-80 leading-relaxed">
               Empowering businesses and connecting talent across industries with reliable, expert workforce solutions.

@@ -18,18 +18,14 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/85 backdrop-blur-lg">
-      <div className="container flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-2.5 group">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-white">
+      <div className="container flex h-32 items-center justify-between md:h-40">
+        <Link to="/" className="flex items-center group">
           <img
-            src="/risevia-favicon.svg"
+            src="/logo.png"
             alt="Risevia Solutions LLP"
-            className="h-10 w-10 group-hover:scale-105 transition-bounce"
+            className="h-24 md:h-32 w-auto group-hover:scale-105 transition-smooth"
           />
-          <div className="flex flex-col leading-none">
-            <span className="font-display text-lg font-extrabold text-foreground">Risevia</span>
-            <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Solutions LLP</span>
-          </div>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
