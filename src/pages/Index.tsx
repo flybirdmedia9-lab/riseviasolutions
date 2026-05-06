@@ -7,8 +7,6 @@ import { industries } from "@/data/industries";
 import heroImg from "@/assets/hero.jpg";
 
 const stats = [
-  { value: "500+", label: "Clients Served" },
-  { value: "10K+", label: "Talent Placed" },
   { value: "6", label: "Industries" },
   { value: "98%", label: "Satisfaction" },
 ];
@@ -49,7 +47,7 @@ const Index = () => {
 
         {/* Stats strip */}
         <div className="relative border-t border-primary-foreground/15 bg-primary-dark/40 backdrop-blur">
-          <div className="container py-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="container max-w-3xl py-6 grid grid-cols-2 gap-6">
             {stats.map((s) => (
               <div key={s.label} className="text-center">
                 <div className="font-display text-3xl md:text-4xl font-extrabold text-primary-glow">{s.value}</div>
