@@ -7,11 +7,11 @@ const Footer = () => {
       <div className="container py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link to="/" className="flex items-center gap-2.5 mb-4">
+            <Link to="/" className="mb-5 inline-flex transition-smooth hover:opacity-95">
               <img
-                src="/logo.png"
+                src="/logo-footer-transparent.png"
                 alt="Risevia Solutions LLP"
-                className="h-28 md:h-36 w-auto"
+                className="h-20 md:h-24 w-auto"
               />
             </Link>
             <p className="text-sm opacity-80 leading-relaxed">

@@ -11,6 +11,8 @@ interface Props {
 }
 
 const PageHeader = ({ title, subtitle, badge, ctaLabel, ctaTo }: Props) => {
+  const isHashLink = Boolean(ctaTo?.startsWith("#"));
+
   return (
     <section className="relative overflow-hidden gradient-hero text-primary-foreground">
       <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 20% 30%, hsl(var(--primary-glow)) 0%, transparent 40%), radial-gradient(circle at 80% 70%, hsl(var(--primary-glow)) 0%, transparent 40%)' }} />
@@ -26,13 +28,23 @@ const PageHeader = ({ title, subtitle, badge, ctaLabel, ctaTo }: Props) => {
           </h1>
           <p className="text-lg md:text-xl opacity-90 max-w-2xl leading-relaxed">{subtitle}</p>
           {ctaLabel && ctaTo && (
-            <Link
-              to={ctaTo}
-              className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 transition-smooth shadow-card-soft"
-            >
-              {ctaLabel}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            isHashLink ? (
+              <a
+                href={ctaTo}
+                className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 transition-smooth shadow-card-soft"
+              >
+                {ctaLabel}
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            ) : (
+              <Link
+                to={ctaTo}
+                className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-foreground text-primary font-semibold hover:bg-primary-foreground/90 transition-smooth shadow-card-soft"
+              >
+                {ctaLabel}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            )
           )}
         </div>
       </div>
