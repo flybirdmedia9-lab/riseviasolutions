@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import PageHeader from "@/components/PageHeader";
 import { toast } from "@/hooks/use-toast";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 const sampleJobs = [
   { title: "Senior Software Engineer", industry: "IT & Healthcare", location: "Hyderabad / Remote", type: "Full-time" },
@@ -39,7 +40,8 @@ const Careers = () => {
 
   const onApply = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
     const result = schema.safeParse(data);
     if (!result.success) {
       toast({ title: "Please check the form", description: result.error.issues[0].message, variant: "destructive" });
@@ -50,12 +52,24 @@ const Careers = () => {
       return;
     }
     setSubmitting(true);
-    setTimeout(() => {
-      toast({ title: "Application submitted", description: "Our recruiters will review and reach out shortly." });
-      (e.target as HTMLFormElement).reset();
-      setResumeName("");
-      setSubmitting(false);
-    }, 800);
+    const values = result.data;
+    const message = [
+      "*New Job Application*",
+      "",
+      `Full Name: ${values.name}`,
+      `Email: ${values.email}`,
+      `Phone: ${values.phone}`,
+      `Preferred Role: ${values.role}`,
+      `Brief About Candidate: ${values.message || "Not provided"}`,
+      `Resume File: ${resumeName}`,
+      "",
+      "Please attach the resume file in this WhatsApp chat.",
+    ].join("\n");
+
+    openWhatsApp(message);
+    form.reset();
+    setResumeName("");
+    setSubmitting(false);
   };
 
   return (

@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import PageHeader from "@/components/PageHeader";
 import { toast } from "@/hooks/use-toast";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Name required").max(100),
@@ -22,22 +23,32 @@ const Contact = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
     const result = schema.safeParse(data);
     if (!result.success) {
       toast({ title: "Please check the form", description: result.error.issues[0].message, variant: "destructive" });
       return;
     }
     setSubmitting(true);
-    setTimeout(() => {
-      toast({ title: "Message sent", description: "We'll respond within one business day." });
-      (e.target as HTMLFormElement).reset();
-      setSubmitting(false);
-    }, 800);
+    const values = result.data;
+    const message = [
+      "*New Contact Message*",
+      "",
+      `Name: ${values.name}`,
+      `Email: ${values.email}`,
+      `Phone: ${values.phone || "Not provided"}`,
+      `Subject: ${values.subject}`,
+      `Message: ${values.message}`,
+    ].join("\n");
+
+    openWhatsApp(message);
+    form.reset();
+    setSubmitting(false);
   };
 
   const contacts = [
-    { icon: Phone, label: "Call us", value: "9769347777", href: "tel:9769347777" },
+    { icon: Phone, label: "Call us", value: "94401 57879", href: "tel:9440157879" },
     { icon: Mail, label: "Email us", value: "management@riseviasolutions.com", href: "mailto:management@riseviasolutions.com" },
     { icon: MapPin, label: "Visit us", value: "Chandramoulinagar, 3rd Line, Guntur", href: "#map" },
     { icon: Clock, label: "Working hours", value: "Mon – Sat, 9:00 AM – 7:00 PM" },
